@@ -1,0 +1,13 @@
+# Rust
+/target
+**/*.rs.bk
+
+# IDEs
+.idea
+.vscode
+
+# SQLx offline data
+sqlx-data.json
+
+# dotenv files
+.env/target

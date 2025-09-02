@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    container_name: pulse_db
+    environment:
+      POSTGRES_USER: pulse
+      POSTGRES_PASSWORD: pulse
+      POSTGRES_DB: pulsewatch
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pulse -d pulsewatch"]
+      interval: 10s
+      timeout: 56s
+      retries: 5
+
+  adminer:
+    image: adminer
+    container_name: pulse_adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

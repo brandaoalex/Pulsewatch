@@ -1,0 +1,29 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO users (email, display_name, is_email_verified)\n            VALUES ($1, $2, $3)\n            ON CONFLICT (email)\n            DO UPDATE SET updated_at = NOW()\n            RETURNING id\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        },
+        "Text",
+        "Bool"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "8f82bd3ad2caef926b628092686b878124c1b8e41c856d10f0df0ceb226e275f"
+}

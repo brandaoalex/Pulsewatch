@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO user_credentials (user_id, password_hash, hash_scheme)\n            VALUES ($1, $2, 'argon2id-v1')\n            ON CONFLICT (user_id) DO UPDATE\n              SET password_hash = EXCLUDED.password_hash,\n                  hash_scheme   = EXCLUDED.hash_scheme,\n                  updated_at    = NOW()\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "80b6435d2ca228afa51251e22a1dda18fafc309e6bd42f44f4b2ce0921a3e03e"
+}

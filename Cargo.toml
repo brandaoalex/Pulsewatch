@@ -1,0 +1,79 @@
+[workspace]
+members = [
+    "crates/api",
+    "crates/cli",
+    "crates/domain",
+    "crates/jobs",
+    "crates/storage",
+    "crates/telemetry",
+]
+resolver = "2"
+
+# Figure out why these aren't applying
+#[workspace.lints.rust]
+#unsafe_code = "forbid"
+#missing_docs = "warn"
+#non_snake_case = "forbid"
+#non_camel_case_types = "forbid"
+#non_upper_case_globals = "forbid"
+
+[package]
+name = "Pulsewatch"
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+tokio = { version = "1", features = ["full"] }
+clap = {version = "4.5.46", features = ["derive"]}
+dotenvy = "0.15.7"
+
+# Web
+axum = "0.8.4"
+tower = "0.5.2"
+tower-http = { version = "0.6.6", features = ["trace", "cors", "compression-br"] }
+
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "postgres", "uuid", "time", "json"] }
+
+# Auth/security
+argon2 = "0.5"
+jsonwebtoken = "9"
+validator = "0.20.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4", "serde"] }
+time = { version = "0.3", features = ["serde"] }
+
+# Errors
+thiserror = "2.0.16"
+anyhow = "1"
+
+# Jobs / brokers
+#apalis = { version = "0.7.3", features = ["redis"] }
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+deadpool-redis = "0.22.0"
+tokio-cron-scheduler = "0.14.0"
+lapin = "3.3.0" # optional, for RabbitMQ
+
+# Telemetry
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "json"] }
+metrics = "0.24.2"
+metrics-exporter-prometheus = "0.17.2"
+
+
+# Docs
+utoipa = { version = "5.4.0", features = ["axum_extras", "uuid", "chrono"] }
+utoipa-swagger-ui = "9.0.2"
+
+# Testing/dev
+tokio-test = "0.4"
+assert-json-diff = "2"
+
+
+# Dev tools not in code but used with cargo
+# - sqlx-cli
+# - cargo-watch
+# - just
+# - clippy
+# - rustfmt
+

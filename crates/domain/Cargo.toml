@@ -1,0 +1,10 @@
+[package]
+name = "domain"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+password-hash = "0.6.0-rc.1"
+argon2 = {workspace = true}
+rand_core = "0.6.4"
+argonautica = "0.2.0"
